@@ -1,0 +1,70 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+GAT	models/gat.py	/^class GAT(nn.Module):$/;"	c
+GraphAttentionLayer	models/layers.py	/^class GraphAttentionLayer(nn.Module):$/;"	c
+SpGAT	models/gat.py	/^class SpGAT(nn.Module):$/;"	c
+SpGraphAttentionLayer	models/layers.py	/^class SpGraphAttentionLayer(nn.Module):$/;"	c
+SpecialSpmm	models/layers.py	/^class SpecialSpmm(nn.Module):$/;"	c
+SpecialSpmmFunction	models/layers.py	/^class SpecialSpmmFunction(torch.autograd.Function):$/;"	c
+__init__	models/gat.py	/^    def __init__(self, nfeat, nhid, nclass, dropout, alpha, nheads):$/;"	m	class:GAT
+__init__	models/gat.py	/^    def __init__(self, nfeat, nhid, nclass, dropout, alpha, nheads):$/;"	m	class:SpGAT
+__init__	models/layers.py	/^    def __init__(self, in_features, out_features, dropout, alpha, concat=True):$/;"	m	class:GraphAttentionLayer
+__init__	models/layers.py	/^    def __init__(self, in_features, out_features, dropout, alpha, concat=True):$/;"	m	class:SpGraphAttentionLayer
+__repr__	models/layers.py	/^    def __repr__(self):$/;"	m	class:GraphAttentionLayer	file:
+accuracy	utils.py	/^def accuracy(output, labels):$/;"	f
+add_nodes	visualize_graph.py	/^    def add_nodes(var):$/;"	f	function:make_dot
+adj	train.py	/^    adj = adj.cuda()$/;"	v
+adj	visualize_graph.py	/^adj = torch.randn(100, 100).cuda()$/;"	v
+alpha	train.py	/^                alpha=args.alpha)$/;"	v
+args	train.py	/^args = parser.parse_args()$/;"	v
+backward	models/layers.py	/^    def backward(ctx, grad_output):$/;"	m	class:SpecialSpmmFunction
+bad_counter	train.py	/^            bad_counter = 0$/;"	v
+bad_counter	train.py	/^    bad_counter = 0$/;"	v
+best	train.py	/^            best = loss_values[-1]$/;"	v
+best	train.py	/^    best = args.epochs + 1$/;"	v
+best_epoch	train.py	/^            best_epoch = epoch$/;"	v
+best_epoch	train.py	/^    best_epoch = 0$/;"	v
+compute_test	train.py	/^def compute_test():$/;"	f
+dropout	train.py	/^                dropout=args.dropout, $/;"	v
+encode_onehot	utils.py	/^def encode_onehot(labels):$/;"	f
+epoch_nb	train.py	/^            epoch_nb = int(file.split('.')[0])$/;"	v
+epoch_nb	train.py	/^        epoch_nb = int(file.split('.')[0])$/;"	v
+features	train.py	/^    features = features.cuda()$/;"	v
+files	train.py	/^        files = glob.glob('*.pkl')$/;"	v
+files	train.py	/^    files = glob.glob('*.pkl')$/;"	v
+forward	models/gat.py	/^    def forward(self, x, adj):$/;"	m	class:GAT
+forward	models/gat.py	/^    def forward(self, x, adj):$/;"	m	class:SpGAT
+forward	models/layers.py	/^    def forward(ctx, indices, values, shape, b):$/;"	m	class:SpecialSpmmFunction
+forward	models/layers.py	/^    def forward(self, indices, values, shape, b):$/;"	m	class:SpecialSpmm
+forward	models/layers.py	/^    def forward(self, input, adj):$/;"	m	class:GraphAttentionLayer
+forward	models/layers.py	/^    def forward(self, input, adj):$/;"	m	class:SpGraphAttentionLayer
+g	visualize_graph.py	/^g = make_dot(y, model.state_dict())$/;"	v
+idx_test	train.py	/^    idx_test = idx_test.cuda()$/;"	v
+idx_train	train.py	/^    idx_train = idx_train.cuda()$/;"	v
+idx_val	train.py	/^    idx_val = idx_val.cuda()$/;"	v
+inputs	visualize_graph.py	/^inputs = torch.randn(100, 50).cuda()$/;"	v
+labels	train.py	/^    labels = labels.cuda()$/;"	v
+load_data	utils.py	/^def load_data(path=".\/data\/cora\/", dataset="cora"):$/;"	f
+loss_values	train.py	/^    loss_values = []$/;"	v
+lr	train.py	/^                       lr=args.lr, $/;"	v
+make_dot	visualize_graph.py	/^def make_dot(var, params):$/;"	f
+model	train.py	/^    model = GAT(nfeat=features.shape[1], $/;"	v
+model	train.py	/^    model = SpGAT(nfeat=features.shape[1], $/;"	v
+model	visualize_graph.py	/^model = SpGAT(50, 8, 7, 0.5, 0.01, 3)$/;"	v
+model	visualize_graph.py	/^model = model.cuda()$/;"	v
+nclass	train.py	/^                nclass=int(labels.max()) + 1, $/;"	v
+nheads	train.py	/^                nheads=args.nb_heads, $/;"	v
+nhid	train.py	/^                nhid=args.hidden, $/;"	v
+normalize_adj	utils.py	/^def normalize_adj(mx):$/;"	f
+normalize_features	utils.py	/^def normalize_features(mx):$/;"	f
+optimizer	train.py	/^optimizer = optim.Adam(model.parameters(), $/;"	v
+parser	train.py	/^parser = argparse.ArgumentParser()$/;"	v
+size_to_str	visualize_graph.py	/^    def size_to_str(size):$/;"	f	function:make_dot
+t_total	train.py	/^    t_total = time.time()$/;"	v
+train	train.py	/^def train(epoch):$/;"	f
+weight_decay	train.py	/^                       weight_decay=args.weight_decay)$/;"	v
+y	visualize_graph.py	/^y = model(inputs, adj)$/;"	v
