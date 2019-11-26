@@ -73,14 +73,14 @@ def main(args):
 
             acc_train = accuracy(output, label)
             train_loss_mean.append(loss_train.data.item())
-            train_acc_mean.append(acc_train)
+            train_acc_mean.append(acc_train.data.item())
 
         print('Epoch: {:04d}'.format(epoch+1),
             'loss_train: {:.4f}'.format(np.mean(train_loss_mean)),
             'acc_train: {:.4f}'.format(np.mean(train_acc_mean)),
             'time: {:.4f}s'.format(time.time() - start_time))
 
-        if epoch == args.patience:
+        if (epoch % args.patience == 0):
             model.eval()
             val_loss_mean = []
             val_acc_mean = []
@@ -91,21 +91,27 @@ def main(args):
 
                 acc_val = accuracy(output, label)
                 val_loss_mean.append(loss_val.data.item())
-                val_acc_mean.append(acc_val)
+                val_acc_mean.append(acc_val.data.item())
+
+            val_acc_mean = np.mean(val_acc_mean)
+            val_loss_mean = np.mean(val_loss_mean)
 
             print("*"*20)
             print('Epoch: {:04d}'.format(epoch+1),
-                'loss_val: {:.4f}'.format(np.mean(val_loss_mean)),
-                'acc_val: {:.4f}'.format(np.mean(val_acc_mean)))
+                'loss_val: {:.4f}'.format(val_loss_mean),
+                'acc_val: {:.4f}'.format(val_acc_mean))
 
-            if (np.mean(val_acc_mean) > best_acc and np.mean(val_loss_mean)):
+            if (val_acc_mean > best_acc \
+                and val_loss_mean < best_loss):
+                best_acc = val_acc_mean
+                best_loss = val_loss_mean
                 torch.save({
                     "state_dict": model.state_dict(),
                     "configs": args,
                     "epoch": epoch,
                     "train_acc": np.mean(train_loss_mean),
                     "val_acc": np.mean(val_loss_mean),
-                }, "{0}_epoch_{1}.pt".format(args.save_path, epoch))
+                }, os.path.join(args.save_path, "model_epoch_{0}.pt".format(epoch)))
 
 
 if __name__ == "__main__":
@@ -115,13 +121,13 @@ if __name__ == "__main__":
     parser.add_argument('--seed', type=int, default=72, help='Random seed.')
     parser.add_argument('--epochs', type=int, default=10000, help='Number of epochs to train.')
     parser.add_argument('--batch_size', type=int, default=16, help='Number of batch size.')
-    parser.add_argument('--lr', type=float, default=0.005, help='Initial learning rate.')
+    parser.add_argument('--lr', type=float, default=1e-4, help='Initial learning rate.')
     parser.add_argument('--weight_decay', type=float, default=5e-4, help='Weight decay (L2 loss on parameters).')
     parser.add_argument('--hidden', type=int, default=64, help='Number of hidden units.')
     parser.add_argument('--nb_heads', type=int, default=8, help='Number of head attentions.')
     parser.add_argument('--dropout', type=float, default=0.5, help='Dropout rate (1 - keep probability).')
     parser.add_argument('--alpha', type=float, default=0.2, help='Alpha for the leaky_relu.')
-    parser.add_argument('--patience', type=int, default=100, help='Patience')
+    parser.add_argument('--patience', type=int, default=50, help='Patience')
 
     # Data params 
     parser.add_argument('--root_dir', type=str, default="./data/toyota_data", help='root path of data')
