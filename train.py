@@ -33,7 +33,7 @@ parser.add_argument('--dropout', type=float, default=0.6, help='Dropout rate (1 
 parser.add_argument('--alpha', type=float, default=0.2, help='Alpha for the leaky_relu.')
 parser.add_argument('--patience', type=int, default=100, help='Patience')
 
-# Data params 
+# Data params
 parser.add_argument('--root_dir', type=str, default="./data/toyota_data", help='root path of data')
 parser.add_argument('--train_file', type=str, default="train.txt", help='a text file that contains training json label paths')
 parser.add_argument('--val_file', type=str, default="val.txt", help='a text file that contains validating json label paths')
@@ -73,12 +73,12 @@ val_loader = DataLoader(val_data, shuffle=True)
 
 
 # Model and optimizer
-model = EGAT(node_feat=len(train_data.corpus), 
+model = EGAT(node_feat=len(train_data.corpus),
             edge_feat=8,
             nclass=len(CLASSES),
             nhidden=args.hidden,
-            dropout=args.dropout, 
-            alpha=args.alpha, 
+            dropout=args.dropout,
+            alpha=args.alpha,
             nheads = args.nb_heads)
 model = model.to(DEVICE)
 optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
@@ -93,9 +93,8 @@ def train(epoch):
         optimizer.zero_grad()
         output = model(in_data)
         label = in_data['graph_lbl']
-        
+
         loss_train = F.nll_loss(output, label)
-        # print("loss train: ", loss_train)
 
         acc_train = accuracy(output, label)
         loss_mean.append(loss_train.data.item())
@@ -118,7 +117,6 @@ def val(epoch):
         output = model(in_data)
         label = in_data['graph_lbl']
         loss_val = F.nll_loss(output, label)
-        # print("loss val: ", loss_val)
 
         acc_val = accuracy(output, label)
         loss_mean.append(loss_val.data.item())
