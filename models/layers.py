@@ -75,15 +75,24 @@ class GraphAttentionLayer(nn.Module):
         self.leakyrelu = nn.LeakyReLU(self.alpha)
 
     def forward(self, input, adj):
-        h = torch.mm(input, self.W)
-        N = h.size()[0]
+        batch_size = input.size(0)
+        num_node = input.size(1)
+        
+        _W = self.W.repeat(batch_size, 1, 1)
+        _a = self.a.repeat(batch_size, 1, 1)
+        h = torch.matmul(input, _W)
+        N = h.size()[1]
 
-        a_input = torch.cat([h.repeat(1, N).view(N * N, -1), h.repeat(N, 1)], dim=1).view(N, -1, 2 * self.out_features)
-        e = self.leakyrelu(torch.matmul(a_input, self.a).squeeze(2))
+        a_input = torch.cat([h.repeat(1, 1, N).view(batch_size, N * N, -1), \
+            h.repeat(1, N, 1)], dim=2).view(batch_size, N, -1, 2 * self.out_features)
+        
+        # e = self.leakyrelu(torch.matmul(a_input, _a).squeeze(-1))
+        e = self.leakyrelu(torch.matmul(a_input.view(batch_size, -1, 2 * self.out_features), _a).squeeze(-1))
+        e = e.view(batch_size, N, N)
 
         zero_vec = -9e15*torch.ones_like(e)
         attention = torch.where(adj > 0, e, zero_vec)
-        attention = F.softmax(attention, dim=1)
+        attention = F.softmax(attention, dim=-1)
         attention = F.dropout(attention, self.dropout, training=self.training)
         h_prime = torch.matmul(attention, h)
 

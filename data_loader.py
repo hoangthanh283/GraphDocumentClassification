@@ -48,6 +48,8 @@ class DatasetLoader(Dataset):
             self._load(self.data_path, self.label_path, self.corpus_path)
         self.file_paths = list(map(lambda f: \
             os.path.join(self.root_dir, f), self.file_list))
+        
+        self.max_node = self._get_max_nodes(self.file_paths)
         self.bow_encoder = BOW(self.corpus)
         self.num_samples = len(self.file_paths)
 
@@ -156,24 +158,43 @@ class DatasetLoader(Dataset):
                 edge_fts[i, j, :] = e_fts
 
         node_fts_txt = torch.tensor(node_fts_txt, dtype=torch.float)
+        node_fts_txt = torch.cat([node_fts_txt, \
+            torch.zeros(self.max_node - len(all_items), len(self.corpus))], dim=0)
+        
         node_fts_loc = torch.tensor(node_fts_loc, dtype=torch.float)
+        node_fts_loc = torch.cat([node_fts_loc, \
+            torch.zeros(self.max_node - len(all_items), 4)], dim=0)
+
+        b_edge_fts = torch.zeros(self.max_node, self.max_node, 8, dtype=torch.float)
         edge_fts = torch.tensor(edge_fts, dtype=torch.float)
-        graph_lbl = torch.tensor(graph_lbl, dtype=torch.long)
+        edge_size = list(edge_fts.size())
+        b_edge_fts[ :edge_size[0], :edge_size[1], :] = edge_fts
 
         node_fts_txt = torch.div(node_fts_txt, torch.max(node_fts_txt))
         node_fts_loc = torch.div(node_fts_loc, torch.max(node_fts_loc))
-        edge_fts = torch.div(edge_fts, torch.max(edge_fts))
+        # edge_fts = torch.div(edge_fts, torch.max(edge_fts))
+        b_edge_fts = torch.div(b_edge_fts, torch.max(b_edge_fts))
+        graph_lbl = torch.tensor(graph_lbl, dtype=torch.long)
 
         data = {'node_fts_txt': node_fts_txt,
                 'node_fts_loc': node_fts_loc,
-                'edge_fts': edge_fts,
+                'edge_fts': b_edge_fts,
                 'graph_lbl': graph_lbl}
+
         return data
 
-    def _load(self, data_path, label_path, corpus_path):
-        # with codecs.open(self.data_path, 'r', 'utf-8-sig') as fi:
-        #     self.raw_data = json.load(fi)
-        
+    def _get_max_nodes(self, file_paths):
+        """ Get a max value of all files """ 
+        def _get_num_items(_fp):
+            with codecs.open(_fp, 'r', 'utf-8-sig') as f:
+                f_data = json.load(f)
+            return len(f_data.get("lines", []))
+
+        max_num_items = max(list(map(_get_num_items, file_paths)))
+        # print("max_num_items: ", max_num_items)
+        return max_num_items
+
+    def _load(self, data_path, label_path, corpus_path):        
         with open(corpus_path) as f:
             corpus = f.read()
         file_paths = self.read_image_list(data_path)

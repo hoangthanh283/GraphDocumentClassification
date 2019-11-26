@@ -1,0 +1,78 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BOW	../data_loader.py	/^class BOW(object):$/;"	kind:class	line:20
+CLASSES	../data_loader.py	/^CLASSES = [0, 1, 2, 3]$/;"	kind:variable	line:16
+DEVICE	../models/gat.py	/^DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')$/;"	kind:variable	line:11
+DEVICE	../train.py	/^DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')$/;"	kind:variable	line:21
+DatasetLoader	../data_loader.py	/^class DatasetLoader(Dataset):$/;"	kind:class	line:33
+EGAT	../models/gat.py	/^class EGAT(nn.Module):$/;"	kind:class	line:60
+EdgeGraphAttentionLayer	../models/layers.py	/^class EdgeGraphAttentionLayer(nn.Module):$/;"	kind:class	line:8
+GAT	../models/gat.py	/^class GAT(nn.Module):$/;"	kind:class	line:14
+GraphAttentionLayer	../models/layers.py	/^class GraphAttentionLayer(nn.Module):$/;"	kind:class	line:58
+SpGAT	../models/gat.py	/^class SpGAT(nn.Module):$/;"	kind:class	line:33
+SpGraphAttentionLayer	../models/layers.py	/^class SpGraphAttentionLayer(nn.Module):$/;"	kind:class	line:133
+SpecialSpmm	../models/layers.py	/^class SpecialSpmm(nn.Module):$/;"	kind:class	line:129
+SpecialSpmmFunction	../models/layers.py	/^class SpecialSpmmFunction(torch.autograd.Function):$/;"	kind:class	line:107
+__euclid_distance	../data_loader.py	/^    def __euclid_distance(self, loc_1, loc_2):$/;"	kind:member	line:93
+__getitem__	../data_loader.py	/^    def __getitem__(self, idx):$/;"	kind:member	line:207
+__hv_distance	../data_loader.py	/^    def __hv_distance(self, loc_1, loc_2):$/;"	kind:member	line:109
+__init__	../data_loader.py	/^    def __init__(self, corpus):$/;"	kind:member	line:21
+__init__	../data_loader.py	/^    def __init__(self, kwargs, transform=True):$/;"	kind:member	line:37
+__init__	../models/gat.py	/^    def __init__(self, nfeat, nhid, nclass, dropout, alpha, nheads):$/;"	kind:member	line:15
+__init__	../models/gat.py	/^    def __init__(self, nfeat, nhid, nclass, dropout, alpha, nheads):$/;"	kind:member	line:34
+__init__	../models/gat.py	/^    def __init__(self, node_feat, edge_feat, nclass, nhidden, dropout, alpha, nheads):$/;"	kind:member	line:61
+__init__	../models/layers.py	/^    def __init__(self, in_features, out_features, dropout, alpha, concat=True):$/;"	kind:member	line:137
+__init__	../models/layers.py	/^    def __init__(self, in_features, out_features, dropout, alpha, concat=True):$/;"	kind:member	line:62
+__init__	../models/layers.py	/^    def __init__(self, node_in_fts, ed_in_fts, node_out_fts, ed_out_fts, dropout=0.0, alpha=0.0, concat=True):$/;"	kind:member	line:9
+__init__.py	../models/__init__.py	1;"	kind:file	line:1
+__len__	../data_loader.py	/^    def __len__(self):$/;"	kind:member	line:204
+__repr__	../models/layers.py	/^    def __repr__(self):$/;"	kind:member	line:104
+_get_max_nodes	../data_loader.py	/^    def _get_max_nodes(self, file_paths):$/;"	kind:member	line:186
+_get_num_items	../data_loader.py	/^        def _get_num_items(_fp):$/;"	kind:function	line:188
+_load	../data_loader.py	/^    def _load(self, data_path, label_path, corpus_path):        $/;"	kind:member	line:197
+_transform	../data_loader.py	/^    def _transform(self, file_path):$/;"	kind:member	line:125
+accuracy	../utils.py	/^def accuracy(output, labels):$/;"	kind:function	line:32
+add_nodes	../visualize_graph.py	/^    def add_nodes(var):$/;"	kind:function	line:32
+adj	../visualize_graph.py	/^adj = torch.randn(100, 100).cuda()$/;"	kind:variable	line:56
+args	../data_loader.py	/^    args = parser.parse_args()$/;"	kind:variable	line:220
+args	../train.py	/^    args = parser.parse_args()$/;"	kind:variable	line:133
+backward	../models/layers.py	/^    def backward(ctx, grad_output):$/;"	kind:member	line:118
+data_loader.py	../data_loader.py	1;"	kind:file	line:1
+encode_onehot	../data_loader.py	/^    def encode_onehot(self, label):$/;"	kind:member	line:88
+encode_onehot	../utils.py	/^def encode_onehot(labels):$/;"	kind:function	line:6
+forward	../models/gat.py	/^    def forward(self, in_data):$/;"	kind:member	line:83
+forward	../models/gat.py	/^    def forward(self, x, adj):$/;"	kind:member	line:26
+forward	../models/gat.py	/^    def forward(self, x, adj):$/;"	kind:member	line:53
+forward	../models/layers.py	/^    def forward(ctx, indices, values, shape, b):$/;"	kind:member	line:110
+forward	../models/layers.py	/^    def forward(self, indices, values, shape, b):$/;"	kind:member	line:130
+forward	../models/layers.py	/^    def forward(self, input, adj):$/;"	kind:member	line:154
+forward	../models/layers.py	/^    def forward(self, input, adj):$/;"	kind:member	line:77
+forward	../models/layers.py	/^    def forward(self, node_fts_txt, edge_fts):$/;"	kind:member	line:36
+g	../visualize_graph.py	/^g = make_dot(y, model.state_dict())$/;"	kind:variable	line:61
+gat.py	../models/gat.py	1;"	kind:file	line:1
+get_label_from_excel	../data_loader.py	/^    def get_label_from_excel(self, filename):$/;"	kind:member	line:75
+inputs	../visualize_graph.py	/^inputs = torch.randn(100, 50).cuda()$/;"	kind:variable	line:55
+kwargs	../data_loader.py	/^    kwargs = {$/;"	kind:variable	line:222
+layers.py	../models/layers.py	1;"	kind:file	line:1
+main	../train.py	/^def main(args):$/;"	kind:function	line:25
+make_dot	../visualize_graph.py	/^def make_dot(var, params):$/;"	kind:function	line:6
+model	../visualize_graph.py	/^model = SpGAT(50, 8, 7, 0.5, 0.01, 3)$/;"	kind:variable	line:57
+model	../visualize_graph.py	/^model = model.cuda()$/;"	kind:variable	line:58
+normalize_adj	../utils.py	/^def normalize_adj(mx):$/;"	kind:function	line:13
+normalize_features	../utils.py	/^def normalize_features(mx):$/;"	kind:function	line:22
+parser	../data_loader.py	/^    parser = argparse.ArgumentParser()$/;"	kind:variable	line:214
+parser	../train.py	/^    parser = argparse.ArgumentParser()$/;"	kind:variable	line:113
+read_image_list	../data_loader.py	/^    def read_image_list(self, path_to_list, prefix=None):$/;"	kind:member	line:56
+reset_parameters	../models/layers.py	/^    def reset_parameters(self):$/;"	kind:member	line:31
+size_to_str	../visualize_graph.py	/^    def size_to_str(size):$/;"	kind:function	line:29
+train.py	../train.py	1;"	kind:file	line:1
+train_ds	../data_loader.py	/^    train_ds = DatasetLoader(kwargs=kwargs, transform=True)$/;"	kind:variable	line:229
+train_loader	../data_loader.py	/^    train_loader = DataLoader(train_ds, shuffle=True)$/;"	kind:variable	line:230
+transform	../data_loader.py	/^    def transform(self, data):$/;"	kind:member	line:24
+utils.py	../utils.py	1;"	kind:file	line:1
+visualize_graph.py	../visualize_graph.py	1;"	kind:file	line:1
+y	../visualize_graph.py	/^y = model(inputs, adj)$/;"	kind:variable	line:59

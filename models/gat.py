@@ -78,6 +78,8 @@ class EGAT(nn.Module):
             nn.Linear(nhidden // 2, nclass)
         )
 
+        self.activation = nn.LeakyReLU(alpha)
+
     def forward(self, in_data):
         """ Node embedding - Edge embedding """
         node_fts_txt = in_data['node_fts_txt'].to(DEVICE)
@@ -89,16 +91,15 @@ class EGAT(nn.Module):
         edges = self.linear(edge_fts).squeeze(-1)
         edges = F.elu(edges)
 
-        # nodes = F.dropout(node_fts, self.dropout, training=self.training).squeeze(0)
-        nodes = node_fts.squeeze(0)
-        # edges = F.dropout(edges, self.dropout, training=self.training).squeeze(0)
-        edges = edges.squeeze(0)
+        nodes = F.dropout(node_fts, self.dropout, training=self.training)
+        edges = F.dropout(edges, self.dropout, training=self.training)
 
-        x = torch.cat([att(nodes, edges) for att in self.attentions], dim=1)
+        x = torch.cat([att(nodes, edges) for att in self.attentions], dim=-1)
         x = F.dropout(x, self.dropout, training=self.training)
 
         x = F.elu(self.out_att(x, edges))
-        x = torch.max(x, dim=0)[0].squeeze()
+        x = torch.max(x, dim=1)[0]
         x = self.fc(x)
-        x = x.unsqueeze(0)
+        x = self.activation(x)
+        
         return F.log_softmax(x, dim=1)

@@ -1,6 +1,11 @@
 import torch
-from models.gat import SpGAT
 from graphviz import Digraph
+from models.gat import (
+    SpGAT, EGAT, GAT
+)
+
+
+DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 def make_dot(var, params):
@@ -52,10 +57,10 @@ def make_dot(var, params):
     add_nodes(var.grad_fn)
     return dot
 
-inputs = torch.randn(100, 50).cuda()
-adj = torch.randn(100, 100).cuda()
+inputs = torch.randn(100, 50).to(DEVICE)
+adj = torch.randn(100, 100).to(DEVICE)
 model = SpGAT(50, 8, 7, 0.5, 0.01, 3)
-model = model.cuda()
+model = model.to(DEVICE)
 y = model(inputs, adj)
 
 g = make_dot(y, model.state_dict())
