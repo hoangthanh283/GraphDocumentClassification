@@ -100,6 +100,6 @@ class EGAT(nn.Module):
         x = F.elu(self.out_att(x, edges))
         x = torch.max(x, dim=1)[0]
         x = self.fc(x)
-        x = self.activation(x)
+        #x = self.activation(x)
         
         return F.log_softmax(x, dim=1)
