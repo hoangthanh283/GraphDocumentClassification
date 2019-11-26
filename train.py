@@ -86,7 +86,7 @@ def main(args):
             val_acc_mean = []
             for in_data in val_loader:
                 output = model(in_data)
-                label = in_data['graph_lbl']
+                label = in_data['graph_lbl'].to(DEVICE)
                 loss_val = F.nll_loss(output, label)
 
                 acc_val = accuracy(output, label)
